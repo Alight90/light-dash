@@ -29,3 +29,10 @@ export const getUvClass = (uv) => {
     return "uv-extreme"; // 11+
 }
 
+export const getDayName = (offset) => {
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  const todayIndex = new Date().getDay()
+  return days[(todayIndex + offset) % 7]
+}
+
+

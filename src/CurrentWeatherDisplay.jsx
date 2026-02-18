@@ -4,7 +4,7 @@ import { formatLocalTime } from "./lib/WeatherApiHelper";
 import { useWeather } from "./lib/Weatherhooks.js";
 import { getUvClass } from './lib/WeatherApiHelper';
 
-export default function CurrentWeatherDisplay() {
+export default function CurrentWeatherDisplay({type}) {
     const { data: weather, loading, error } = useWeather("current");
 
 
@@ -14,13 +14,23 @@ export default function CurrentWeatherDisplay() {
     }
 
 
-    return (
-        <>
-            <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
+    return {
+        top:(<>
+                    <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
                 {weather?.location?.name}
                 <br />
                 {weather?.location?.region}
             </Typography>
+        </>),
+    left:(
+        <>
+            <Typography variant="h5" component="div">
+Placeholder
+            </Typography>
+        </>
+    ),
+    middle:(
+           <>
             <Typography variant="h5" component="div">
                 Actual Temp: {weather?.current?.temp_f}
                 <br />
@@ -36,7 +46,21 @@ export default function CurrentWeatherDisplay() {
                     <b> {weather?.current?.uv}</b>
                 </span>
             </Typography>
-            <Typography size="small">{formatLocalTime(weather?.location?.localtime)}</Typography>
         </>
-    );
+    ),
+right:(
+<>
+        <>
+            <Typography variant="h5" component="div">
+Placeholder
+            </Typography>
+        </>
+</>
+),
+bottom:(
+    <>
+    <Typography size="small">Last Updated: {formatLocalTime(weather?.location?.localtime)}</Typography>
+    </>
+)
+}
 }
