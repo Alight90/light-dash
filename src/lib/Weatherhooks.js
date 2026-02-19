@@ -13,8 +13,6 @@ export function useWeather(type = "current") {
 
     useEffect(() => {
         let ignore = false;
-        let preloadTimer;
-        let updateTimer;
 
         // --- CACHE HELPERS ---
         function getCached() {
@@ -94,30 +92,39 @@ export function useWeather(type = "current") {
         }
 
         // --- APPLY PRELOADED UPDATE ---
-        function scheduleRefresh() {
-            // Preload at 14 minutes
-            preloadTimer = setInterval(preloadNext, 14 * 60 * 1000);
+function scheduleRefresh() {
+  async function cycle() {
+    // 1. Preload at 14 minutes
+    await new Promise(resolve => setTimeout(resolve, 14 * 60 * 1000));
+    await preloadNext();
 
-            // Apply update at 15 minutes
-            updateTimer = setInterval(() => {
-                if (!ignore && preloadRef.current) {
-                    setData(preloadRef.current);
-                    saveCache(preloadRef.current);
-                    preloadRef.current = null;
-                    setError(null);
-                }
-            }, 15 * 60 * 1000);
-        }
+    // 2. Apply update at 15 minutes
+    await new Promise(resolve => setTimeout(resolve, 1 * 60 * 1000));
+    if (!ignore && preloadRef.current) {
+      setData(preloadRef.current);
+      saveCache(preloadRef.current);
+      preloadRef.current = null;
+      setError(null);
+    }
+
+    // 3. Repeat only if still mounted
+    if (!ignore) cycle();
+  }
+
+  cycle();
+}
+
+
+
 
         initialLoad();
         scheduleRefresh();
 
-        return () => {
-            ignore = true;
-            clearInterval(preloadTimer);
-            clearInterval(updateTimer);
-        };
-    }, [type]);
+  return () => {
+    ignore = true;
+  };
+}, [type]);
 
-    return { data, loading, error };
+// ⬅️ THIS return must be OUTSIDE the effect
+return { data, loading, error };
 }

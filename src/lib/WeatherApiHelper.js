@@ -35,4 +35,9 @@ export const getDayName = (offset) => {
   return days[(todayIndex + offset) % 7]
 }
 
+export function getForecastForDay(weather, alignment) {
+  if (!weather) return null;
+  return weather?.forecast?.forecastday?.[alignment] ?? null;
+}
+
 

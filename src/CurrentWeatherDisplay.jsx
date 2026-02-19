@@ -32,9 +32,9 @@ Placeholder
     middle:(
            <>
             <Typography variant="h5" component="div">
-                Actual Temp: {weather?.current?.temp_f}
+                Actual Temp: {weather?.current?.temp_f!=null ? Math.floor(weather?.current?.temp_f):""}
                 <br />
-                Feels Like: {weather?.current?.feelslike_f}
+                Feels Like: {weather?.current?.feelslike_f !=null ? Math.floor(weather?.current?.feelslike_f):""}
             </Typography>
             <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
                 <img src={weather?.current?.condition?.icon} alt="" />
@@ -43,7 +43,7 @@ Placeholder
                 {weather?.current?.condition?.text}
                 <br />
                 <span className={getUvClass(weather?.current?.uv)}>
-                    <b> {weather?.current?.uv}</b>
+                    <b> {weather?.current?.uv!=null ? Math.floor(weather?.current?.uv):""}</b>
                 </span>
             </Typography>
         </>
