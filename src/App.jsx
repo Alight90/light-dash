@@ -1,56 +1,56 @@
 import { useState } from "react";
 import WeatherBar from "./WeatherBar";
 import WeatherDisplay from "./WeatherDisplay";
-import { Card, CardContent, Box } from '@mui/material';
-import "./App.css"
+import { Card, CardContent, Box } from '@mui/material'
+import FullWeatherDisplay from "./FullWeatherDisplay";
 
 
 function App() {
-  const [alignment, setAlignment] = useState("0");
-  const [type, setType] = useState("current");
-
-  console.log(type, alignment)
-
 
   return (
+    <Box
+      sx={{
+        width: "100%",
+        minHeight: "100vh",
+        display: "grid",
+        gridTemplateColumns: "1fr 2fr 1fr",   // left | middle | right
+        gridTemplateRows: "1fr 1fr",          // top | bottom
+        gap: 2,
+        p: 2,
+      }}
+    >
 
-    <Card sx={{
-      width: 550, position: "relative",
-      borderRadius: "10px",
-      overflow: "hidden",
-      boxShadow: "0 4px 20px rgba(0,0,0,0.25)",
-      userSelect: "none"
-    }}>
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: 'url("/global-map.png")',
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          filter: "brightness(0.85)", // optional darken
-          zIndex: 0
-        }}
-      />
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: "rgba(0,0,0,0.15)",
-          zIndex: 1
-        }}
-      />
+      {/* TOP LEFT */}
+      <Box sx={{ gridColumn: "1 / 2", gridRow: "1 / 2" }}>
+        {/* Replace with your real component */}
+        <FullWeatherDisplay />
+      </Box>
 
-      <CardContent sx={{ position: "relative", zIndex: 2, p: 3, userSelect: "none" }}>
-        <WeatherBar alignment={alignment} onAlignmentChange={setAlignment}
-          onTypeChange={setType} type={type} />
-        <CardContent sx={{
-          userSelect: "none"
-        }}>
-          <WeatherDisplay type={type} alignment={alignment} />
-        </CardContent>
-      </CardContent>
-    </Card>
+      {/* MIDDLE COLUMN (spans both rows) */}
+      <Box sx={{ gridColumn: "2 / 3", gridRow: "1 / 3" }}>
+        {/* Replace with your real component */}
+        <FullWeatherDisplay />
+      </Box>
+
+      {/* TOP RIGHT */}
+      <Box sx={{ gridColumn: "3 / 4", gridRow: "1 / 2" }}>
+        {/* Replace with your real component */}
+        <FullWeatherDisplay />
+      </Box>
+
+      {/* BOTTOM LEFT */}
+      <Box sx={{ gridColumn: "1 / 2", gridRow: "2 / 3" }}>
+        {/* Replace with your real component */}
+        <FullWeatherDisplay />
+      </Box>
+
+      {/* BOTTOM RIGHT */}
+      <Box sx={{ gridColumn: "3 / 4", gridRow: "2 / 3" }}>
+        {/* Replace with your real component */}
+        <FullWeatherDisplay />
+      </Box>
+
+    </Box>
 
 
   )

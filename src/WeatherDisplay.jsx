@@ -10,7 +10,8 @@ export default function WeatherDisplay({ type, alignment }) {
       : ForecastWeatherDisplay({ alignment })
   return (
     <Box sx={{ width: "100%" }}>
-      <Box sx={{ mb: 2 }}>
+      <Box sx={{ mb: 2, display: "flex", justifyContent: "center" }}>
+
         {sections.top}
       </Box>
 
@@ -27,7 +28,8 @@ export default function WeatherDisplay({ type, alignment }) {
           {sections.right}
         </Box>
       </Box>
-      <Box sx={{ mt: 2 }}>
+      <Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
+
         {sections.bottom}
       </Box>
     </Box>

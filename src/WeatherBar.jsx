@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import { getDayName } from './lib/WeatherApiHelper';
 const label = { inputProps: { 'aria-label': 'Toggle Forecast Mode' } };
 
-export default function WeatherBar({ alignment, onAlignmentChange,type,onTypeChange }) {
+export default function WeatherBar({ alignment, onAlignmentChange, type, onTypeChange }) {
 
     const handleChange = (event, newAlignment) => {
         if (newAlignment !== null) {
@@ -19,38 +19,38 @@ export default function WeatherBar({ alignment, onAlignmentChange,type,onTypeCha
         }
     };
 
-    const handleTypeChange =(event)=>{
-  const isOn = event.target.checked
-  onTypeChange(isOn ? "forecast" : "current")
+    const handleTypeChange = (event) => {
+        const isOn = event.target.checked
+        onTypeChange(isOn ? "forecast" : "current")
 
     }
 
 
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+        <Box sx={{ width: "100%" }}>
+            <AppBar position="static" sx={{ width: "100%" }}>
                 <Toolbar>
-                     <FormGroup>
-      <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-        <Typography>Current</Typography>
-              <Switch {...label}
-              checked={type === "forecast"}
-      onChange={handleTypeChange}
-       sx={{
-    '& .MuiSwitch-switchBase.Mui-checked': {
-      color: '#81c784',
-    },
-    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-      backgroundColor: '#81c784',
-    },
-  }}
+                    <FormGroup>
+                        <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+                            <Typography>Current</Typography>
+                            <Switch {...label}
+                                checked={type === "forecast"}
+                                onChange={handleTypeChange}
+                                sx={{
+                                    '& .MuiSwitch-switchBase.Mui-checked': {
+                                        color: '#81c784',
+                                    },
+                                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                        backgroundColor: '#81c784',
+                                    },
+                                }}
 
- />
-        <Typography style={{ marginRight: "12px" }}>Forecast</Typography>
-      </Stack>
-    </FormGroup>
-                {type === "forecast"&& <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            />
+                            <Typography style={{ marginRight: "12px" }}>Forecast</Typography>
+                        </Stack>
+                    </FormGroup>
+                    {type === "forecast" && <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         <ToggleButtonGroup
                             sx={{
                                 "& .MuiToggleButton-root": {
@@ -65,7 +65,7 @@ export default function WeatherBar({ alignment, onAlignmentChange,type,onTypeCha
 
                             value={alignment}
                             exclusive
-                            onChange={handleChange} 
+                            onChange={handleChange}
                             aria-label="Platform"
                         >
 
