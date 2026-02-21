@@ -3,6 +3,7 @@ import WeatherBar from "./WeatherBar";
 import WeatherDisplay from "./WeatherDisplay";
 import { Card, CardContent, Box } from '@mui/material'
 import FullWeatherDisplay from "./FullWeatherDisplay";
+import ToDoDisplay from "./ToDo/toDoDisplay"
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
       {/* MIDDLE COLUMN (spans both rows) */}
       <Box sx={{ gridColumn: "2 / 3", gridRow: "1 / 3" }}>
         {/* Replace with your real component */}
-        <FullWeatherDisplay />
+        <ToDoDisplay/>
       </Box>
 
       {/* TOP RIGHT */}
